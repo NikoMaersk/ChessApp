@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayScreenController">
+   <children>
+      <Canvas fx:id="background" height="335.0" layoutY="80.0" width="335.0" />
+      <Canvas fx:id="foreground" height="335.0" layoutY="80.0" width="335.0" />
+      <GridPane alignment="CENTER" hgap="10.0" layoutY="415.0" prefHeight="30.0" prefWidth="335.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="168.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="167.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="playerLabel" alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="30.0" prefWidth="165.0" text="Label" textFill="WHITE" />
+            <Label fx:id="playerTimeLabel" focusTraversable="false" prefHeight="35.0" prefWidth="165.0" text="Label" textFill="WHITE" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane alignment="CENTER" hgap="10.0" layoutY="50.0" prefHeight="30.0" prefWidth="335.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="168.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="167.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="opponentLabel" alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="30.0" prefWidth="165.0" text="Label" textFill="WHITE" />
+            <Label fx:id="opponentTimeLabel" focusTraversable="false" prefHeight="35.0" prefWidth="165.0" text="Label" textFill="WHITE" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,62 @@
+
+.root
+{
+    -fx-background-color: #312f29;
+}
+
+.button
+{
+    -fx-border-radius: 5;
+    -fx-font-size: 14;
+}
+
+.button:hover
+{
+    -fx-border-radius: 2;
+    -fx-border-width: 3;
+    -fx-border-color: #81b64c;
+}
+
+.button:focused
+{
+    -fx-border-radius: 2;
+    -fx-border-width: 3;
+    -fx-border-color: #81b64c;
+}
+
+#playBtn
+{
+    -fx-background-color: #81B64CFF;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: WHITE;
+    -fx-effect: dropshadow(gaussian, rgb(96, 151, 55), 0, 3, 0, 3);
+}
+
+.label
+{
+    -fx-font-weight: BOLD;
+}
+
+.menu-button
+{
+    -fx-background-color: #81B64CFF;
+    -fx-background-radius: 5;
+    -fx-pref-height: 30.0;
+    -fx-pref-width: 100.0;
+    -fx-min-height: 30.0;
+    -fx-min-width: 100.0;
+    -fx-font-size: 14;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: BOLD;
+    -fx-effect: dropshadow(gaussian, rgb(96, 151, 55), 0, 3, 0, 3);
+}
+
+.menu-button:hover
+{
+    -fx-border-radius: 16;
+}
+
+.menu-button:focused
+{
+    -fx-background-radius: 12;
+}
