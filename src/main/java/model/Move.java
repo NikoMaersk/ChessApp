@@ -2,26 +2,26 @@ package model;
 
 public class Move
 {
-    private int x;
-    private int y;
+    private final int X;
+    private final int y;
     private boolean isSquareOccupied;
 
     public Move(int x, int y)
     {
-        this.x = x;
+        this.X = x;
         this.y = y;
     }
 
     public Move(int x, int y, boolean isSquareOccupied)
     {
-        this.x = x;
+        this.X = x;
         this.y = y;
         this.isSquareOccupied = isSquareOccupied;
     }
 
     public int getX()
     {
-        return x;
+        return X;
     }
 
     public int getY()
@@ -34,13 +34,4 @@ public class Move
         return isSquareOccupied;
     }
 
-    public void setX(int xIndex)
-    {
-        this.x = xIndex;
-    }
-
-    public void setY(int yIndex)
-    {
-        this.y = yIndex;
-    }
 }

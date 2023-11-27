@@ -6,8 +6,6 @@ import model.Move;
 import model.Square;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Pawn extends Piece
 {
@@ -19,15 +17,14 @@ public class Pawn extends Piece
     }
 
     @Override
-    public List<Move> getLegalMoves(GameBoard gameBoard)
+    public void computeLegalMoves(GameBoard gameBoard)
     {
-        List<Move> moveList = new ArrayList<>();
+        super.legalMoves.clear();
         Square square = gameBoard.getSquareHoldingPiece(this);
         int x = square.getXIndex();
         int y = square.getYIndex();
 
         int targetY = y;
-
 
         if (gameBoard.isWhite())
         {
@@ -40,7 +37,7 @@ public class Pawn extends Piece
             if (firstMove)
             {
                 int offset = (this.getColor() == ChessColorEnum.WHITE) ? -2 : 2;
-                moveList.add(new Move(x, y + offset));
+                super.legalMoves.add(new Move(x, y + offset));
             }
         }
         else
@@ -54,12 +51,38 @@ public class Pawn extends Piece
             if (firstMove)
             {
                 int offset = (this.getColor() == ChessColorEnum.WHITE) ? 2 : -2;
-                moveList.add(new Move(x, y + offset));
+                super.legalMoves.add(new Move(x, y + offset));
             }
         }
 
-        moveList.add(new Move(x, targetY));
+        if (gameBoard.isValidCoordinate(x, targetY) && gameBoard.getSquaresAs2D()[x][targetY].getPiece() == null)
+        {
+            super.legalMoves.add(new Move(x, targetY));
+        }
 
-        return moveList;
+
+        if (canCapture(gameBoard, x - 1, targetY))
+            super.legalMoves.add(new Move(x - 1, targetY, true));
+        if (canCapture(gameBoard, x + 1, targetY))
+            super.legalMoves.add(new Move(x + 1, targetY, true));
+    }
+
+    private boolean canCapture(GameBoard gameBoard, int x, int y)
+    {
+        if (!gameBoard.isValidCoordinate(x, y))
+            return false;
+
+        Piece targetPiece = gameBoard.getSquaresAs2D()[x][y].getPiece();
+        return targetPiece != null && targetPiece.getColor() != this.getColor();
+    }
+
+    public boolean isFirstMove()
+    {
+        return firstMove;
+    }
+
+    public void setFirstMove(boolean firstMove)
+    {
+        this.firstMove = firstMove;
     }
 }

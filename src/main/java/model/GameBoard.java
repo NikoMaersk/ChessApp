@@ -166,24 +166,65 @@ public class GameBoard
         return null;
     }
 
-    public void capture(Move move, Piece piece)
+
+    public void move(Square origin, Square target)
     {
-        if (move != null && move.isSquareOccupied())
+        Piece piece = origin.getPiece();
+
+        origin.setPiece(null);
+
+        if (target.getPiece() == null)
+        {
+            target.setPiece(piece);
+            if (piece instanceof Pawn)
+            {
+                ((Pawn) piece).setFirstMove(false);
+            }
+        }
+    }
+
+
+    public void capture(Square origin, Square target)
+    {
+        if (target.getPiece() != null)
+        {
+            target.setPiece(origin.getPiece());
+            origin.setPiece(null);
+        }
+    }
+
+
+    public boolean canMoveTo(Square origin, Square target)
+    {
+        Piece piece = origin.getPiece();
+
+        return piece.getLegalMoves().stream().anyMatch(m -> m.getX() == target.getXIndex() && m.getY() == target.getYIndex());
+    }
+
+
+    public boolean canCapture(Square origin, Square target)
+    {
+        Piece attacker = origin.getPiece();
+        Piece targetPiece = target.getPiece();
+
+        boolean canCapture;
+
+        for (Move move : attacker.getLegalMoves())
         {
             int x = move.getX();
             int y = move.getY();
+            int targetX = target.getXIndex();
+            int targetY = target.getYIndex();
 
-            squares[x][y].setPiece(piece);
+            if (x == targetX && y == targetY && targetPiece != null && targetPiece.getColor() != attacker.getColor())
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 
-    public void move(Move move)
-    {
-        if (move != null)
-        {
-
-        }
-    }
 
     /**
      * Tests if x- and y-coordinates are within chessboard bounds
@@ -191,7 +232,7 @@ public class GameBoard
      * @param y row on the chessboard
      * @return true if coordinates are within bounds else false
      */
-    private boolean isValidCoordinate(int x, int y)
+    public boolean isValidCoordinate(int x, int y)
     {
         return x >= 0 && x < squares.length && y >= 0 && y < squares[x].length;
     }

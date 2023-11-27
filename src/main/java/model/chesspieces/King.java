@@ -4,7 +4,6 @@ import model.GameBoard;
 import model.Move;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class King extends Piece
@@ -15,9 +14,9 @@ public class King extends Piece
     }
 
     @Override
-    public List<Move> getLegalMoves(GameBoard gameBoard)
+    public void computeLegalMoves(GameBoard gameBoard)
     {
-        List<Move> moveList = new ArrayList<>();
+        super.legalMoves.clear();
 
         int[][] possibleMoves = {
                 {1, 0},
@@ -26,8 +25,6 @@ public class King extends Piece
                 {0, 1},
         };
 
-        fillWithPossibleMoves(possibleMoves, moveList, gameBoard);
-
-        return moveList;
+        super.fillWithPossibleMoves(possibleMoves, super.legalMoves, gameBoard);
     }
 }

@@ -1,11 +1,8 @@
 package model.chesspieces;
 
 import model.GameBoard;
-import model.Move;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rook extends Piece
 {
@@ -15,12 +12,10 @@ public class Rook extends Piece
     }
 
     @Override
-    public List<Move> getLegalMoves(GameBoard gameBoard)
+    public void computeLegalMoves(GameBoard gameBoard)
     {
-        List<Move> moveList = new ArrayList<>();
+        super.legalMoves.clear();
 
-        getRookMoves(moveList, gameBoard);
-
-        return moveList;
+        getRookMoves(super.legalMoves, gameBoard);
     }
 }

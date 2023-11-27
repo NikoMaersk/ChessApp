@@ -15,13 +15,11 @@ public class Queen extends Piece
     }
 
     @Override
-    public List<Move> getLegalMoves(GameBoard gameBoard)
+    public void computeLegalMoves(GameBoard gameBoard)
     {
-        List<Move> moveList = new ArrayList<>();
+        super.legalMoves.clear();
 
-        getBishopMoves(moveList, gameBoard);
-        getRookMoves(moveList, gameBoard);
-
-        return moveList;
+        getBishopMoves(super.legalMoves, gameBoard);
+        getRookMoves(super.legalMoves, gameBoard);
     }
 }

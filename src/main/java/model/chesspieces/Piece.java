@@ -6,6 +6,7 @@ import model.Move;
 import model.Square;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece
@@ -13,15 +14,17 @@ public abstract class Piece
     private final ChessColorEnum color;
     private final Image image;
     private final String pieceName;
+    protected List<Move> legalMoves;
 
     public Piece(String imageURL, String name, boolean isWhite)
     {
         this.color = isWhite ? ChessColorEnum.WHITE : ChessColorEnum.BLACK;
         this.image = new Image(imageURL);
         this.pieceName = name;
+        this.legalMoves = new ArrayList<>();
     }
 
-    public abstract List<Move> getLegalMoves(GameBoard gameBoard);
+    public abstract void computeLegalMoves(GameBoard gameBoard);
 
     public boolean isValidMove(int row, int column, int size)
     {
@@ -140,5 +143,10 @@ public abstract class Piece
     public String getPieceName()
     {
         return pieceName;
+    }
+
+    public List<Move> getLegalMoves()
+    {
+        return legalMoves;
     }
 }

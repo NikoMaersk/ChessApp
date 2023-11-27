@@ -16,9 +16,9 @@ public class Knight extends Piece
     }
 
     @Override
-    public List<Move> getLegalMoves(GameBoard gameBoard)
+    public void computeLegalMoves(GameBoard gameBoard)
     {
-        List<Move> moveList = new ArrayList<>();
+        super.legalMoves.clear();
 
         int[][] possibleMoves = {
                 {2, 1},
@@ -31,8 +31,6 @@ public class Knight extends Piece
                 {-1, -2}
         };
 
-        super.fillWithPossibleMoves(possibleMoves, moveList, gameBoard);
-
-        return moveList;
+        super.fillWithPossibleMoves(possibleMoves, super.legalMoves, gameBoard);
     }
 }
