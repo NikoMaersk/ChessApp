@@ -88,44 +88,40 @@ public class GameBoard
         int column = 0;
 
         // opponent pieces
-        boolean black = !isWhite;
-
-        squares[column++][0].setPiece(new Rook(black));
-        squares[column++][0].setPiece(new Knight(black));
-        squares[column++][0].setPiece(new Bishop(black));
-        squares[column++][0].setPiece(new Queen(black));
-        squares[column++][0].setPiece(new King(black));
-        squares[column++][0].setPiece(new Bishop(black));
-        squares[column++][0].setPiece(new Knight(black));
-        squares[column][0].setPiece(new Rook(black));
+        squares[column++][0].setPiece(new Rook(!isWhite));
+        squares[column++][0].setPiece(new Knight(!isWhite));
+        squares[column++][0].setPiece(new Bishop(!isWhite));
+        squares[column++][0].setPiece(new Queen(!isWhite));
+        squares[column++][0].setPiece(new King(!isWhite));
+        squares[column++][0].setPiece(new Bishop(!isWhite));
+        squares[column++][0].setPiece(new Knight(!isWhite));
+        squares[column][0].setPiece(new Rook(!isWhite));
 
         column = 0;
 
         while (column < ROWS)
         {
-            squares[column++][1].setPiece(new Pawn(black));
+            squares[column++][1].setPiece(new Pawn(!isWhite));
         }
 
         // player pieces
-        boolean white = isWhite;
-
         column = 0;
 
         while (column < ROWS)
         {
-            squares[column++][6].setPiece(new Pawn(white));
+            squares[column++][6].setPiece(new Pawn(isWhite));
         }
 
         column = 0;
 
-        squares[column++][7].setPiece(new Rook(white));
-        squares[column++][7].setPiece(new Knight(white));
-        squares[column++][7].setPiece(new Bishop(white));
-        squares[column++][7].setPiece(new Queen(white));
-        squares[column++][7].setPiece(new King(white));
-        squares[column++][7].setPiece(new Bishop(white));
-        squares[column++][7].setPiece(new Knight(white));
-        squares[column][7].setPiece(new Rook(white));
+        squares[column++][7].setPiece(new Rook(isWhite));
+        squares[column++][7].setPiece(new Knight(isWhite));
+        squares[column++][7].setPiece(new Bishop(isWhite));
+        squares[column++][7].setPiece(new Queen(isWhite));
+        squares[column++][7].setPiece(new King(isWhite));
+        squares[column++][7].setPiece(new Bishop(isWhite));
+        squares[column++][7].setPiece(new Knight(isWhite));
+        squares[column][7].setPiece(new Rook(isWhite));
     }
 
     /**

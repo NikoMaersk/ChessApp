@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.*;
 import model.chesspieces.Piece;
@@ -37,6 +35,19 @@ public class PlayScreenController
         ObserverPlayer observer = ObserverPlayer.getObserver();
         observer.subscribe(Scenes.SETTING_SCREEN, this::setPlayer);
         foreground.setOnMousePressed(this::handleMousePress);
+
+        /*
+        foreground.setOnMouseDragged(e ->
+        {
+            if (selectedSquare != null && selectedPiece != null)
+            {
+                clearForeground();
+                drawBoard();
+                drawMoves(selectedPiece.getLegalMoves());
+                drawPieceXY(selectedSquare, e.getX(), e.getY());
+            }
+        });
+        */
     }
 
     private void handleMousePress(MouseEvent e)
@@ -55,6 +66,12 @@ public class PlayScreenController
                 && selectedPiece.getColor() == player.getColor())
         {
             handleValidMove(e);
+        }
+        else if (selectedSquare != null && selectedPiece == getSelectedSquare(e.getX(), e.getY()).getPiece())
+        {
+            clearLegalMoves(selectedPiece.getLegalMoves());
+            selectedPiece = null;
+            selectedSquare = null;
         }
         else
         {
@@ -136,6 +153,16 @@ public class PlayScreenController
         gc.drawImage(piece.getImage(), square.getXPos(), square.getYPos(), square.getSquareSize(), square.getSquareSize());
     }
 
+
+    public void drawPieceXY(Square square, double x, double y)
+    {
+        Piece piece = square.getPiece();
+        double size = square.getSquareSize();
+        GraphicsContext gc = foreground.getGraphicsContext2D();
+
+        gc.drawImage(piece.getImage(), x - (size / 2), y - (size / 2), size, size);
+    }
+
     private void drawSquareAndPiece(Square square)
     {
         drawSquare(square);
@@ -144,6 +171,7 @@ public class PlayScreenController
             drawPiece(square);
         }
     }
+
 
     private void clearSquare(double x, double y, double squareSize)
     {

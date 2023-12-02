@@ -23,6 +23,10 @@ public class King extends Piece
                 {-1, 0},
                 {0, -1},
                 {0, 1},
+                {-1, -1},
+                {-1, 1},
+                {1, -1},
+                {1, 1}
         };
 
         super.fillWithPossibleMoves(possibleMoves, super.legalMoves, gameBoard);

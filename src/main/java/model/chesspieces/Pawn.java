@@ -37,7 +37,11 @@ public class Pawn extends Piece
             if (firstMove)
             {
                 int offset = (this.getColor() == ChessColorEnum.WHITE) ? -2 : 2;
-                super.legalMoves.add(new Move(x, y + offset));
+
+                if (gameBoard.getSquaresAs2D()[x][targetY].getPiece() == null && gameBoard.getSquaresAs2D()[x][y + offset].getPiece() == null)
+                {
+                    super.legalMoves.add(new Move(x, y + offset));
+                }
             }
         }
         else
@@ -51,7 +55,11 @@ public class Pawn extends Piece
             if (firstMove)
             {
                 int offset = (this.getColor() == ChessColorEnum.WHITE) ? 2 : -2;
-                super.legalMoves.add(new Move(x, y + offset));
+
+                if (gameBoard.getSquaresAs2D()[x][targetY].getPiece() == null && gameBoard.getSquaresAs2D()[x][y + offset].getPiece() == null)
+                {
+                    super.legalMoves.add(new Move(x, y + offset));
+                }
             }
         }
 
