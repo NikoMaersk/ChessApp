@@ -10,7 +10,7 @@ public class King extends Piece
 {
     public King(boolean isWhite)
     {
-        super(isWhite ? new File("src/main/resources/images/wk.png").getAbsolutePath() : new File("src/main/resources/images/bk.png").getAbsolutePath(), "king", isWhite);
+        super(isWhite ? new File("src/main/resources/images/wk.png").getAbsolutePath() : new File("src/main/resources/images/bk.png").getAbsolutePath(), "king", 100, isWhite);
     }
 
     @Override

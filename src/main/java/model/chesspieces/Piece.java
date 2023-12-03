@@ -14,13 +14,15 @@ public abstract class Piece
     private final ChessColorEnum color;
     private final Image image;
     private final String pieceName;
+    private final int value;
     protected List<Move> legalMoves;
 
-    public Piece(String imageURL, String name, boolean isWhite)
+    public Piece(String imageURL, String name, int value, boolean isWhite)
     {
         this.color = isWhite ? ChessColorEnum.WHITE : ChessColorEnum.BLACK;
         this.image = new Image(imageURL);
         this.pieceName = name;
+        this.value = value;
         this.legalMoves = new ArrayList<>();
     }
 
@@ -127,7 +129,7 @@ public abstract class Piece
     @Override
     public String toString()
     {
-        return color.toString().toLowerCase() + " " + pieceName;
+        return color.toString().toLowerCase() + " " + pieceName + " " + value;
     }
 
     public Image getImage()

@@ -12,7 +12,7 @@ public class Knight extends Piece
     public Knight(boolean isWhite)
     {
         super(isWhite ? new File("src/main/resources/images/wn.png").getAbsolutePath() : new File("src/main/resources/images/bn.png").getAbsolutePath(),
-                "knight", isWhite);
+                "knight", 3, isWhite);
     }
 
     @Override

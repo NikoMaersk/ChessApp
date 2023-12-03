@@ -11,7 +11,7 @@ public class Queen extends Piece
 {
     public Queen(boolean isWhite)
     {
-        super(isWhite ? new File("src/main/resources/images/wq.png").getAbsolutePath() : new File("src/main/resources/images/bq.png").getAbsolutePath(), "queen", isWhite);
+        super(isWhite ? new File("src/main/resources/images/wq.png").getAbsolutePath() : new File("src/main/resources/images/bq.png").getAbsolutePath(), "queen", 9, isWhite);
     }
 
     @Override

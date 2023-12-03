@@ -13,7 +13,7 @@ public class Pawn extends Piece
 
     public Pawn(boolean isWhite)
     {
-        super(isWhite ? new File("src/main/resources/images/wp.png").getAbsolutePath() : new File("src/main/resources/images/bp.png").getAbsolutePath(), "pawn", isWhite);
+        super(isWhite ? new File("src/main/resources/images/wp.png").getAbsolutePath() : new File("src/main/resources/images/bp.png").getAbsolutePath(), "pawn", 1, isWhite);
     }
 
     @Override

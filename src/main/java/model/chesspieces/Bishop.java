@@ -12,7 +12,7 @@ public class Bishop extends Piece
     {
         super(isWhite ?
                 new File("src/main/resources/images/wb.png").getAbsolutePath() : new File("src/main/resources/images/bb.png").getAbsolutePath(),
-                "bishop", isWhite);
+                "bishop", 3, isWhite);
     }
 
     @Override

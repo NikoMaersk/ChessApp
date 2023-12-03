@@ -8,7 +8,7 @@ public class Rook extends Piece
 {
     public Rook(boolean isWhite)
     {
-        super(isWhite ? new File("src/main/resources/images/wr.png").getAbsolutePath() : new File("src/main/resources/images/br.png").getAbsolutePath(), "rook", isWhite);
+        super(isWhite ? new File("src/main/resources/images/wr.png").getAbsolutePath() : new File("src/main/resources/images/br.png").getAbsolutePath(), "rook", 5, isWhite);
     }
 
     @Override

@@ -67,7 +67,9 @@ public class PlayScreenController
         {
             handleValidMove(e);
         }
-        else if (selectedSquare != null && selectedPiece == getSelectedSquare(e.getX(), e.getY()).getPiece())
+        else if (selectedSquare != null
+                && selectedPiece != null
+                && selectedPiece == getSelectedSquare(e.getX(), e.getY()).getPiece())
         {
             clearLegalMoves(selectedPiece.getLegalMoves());
             selectedPiece = null;
