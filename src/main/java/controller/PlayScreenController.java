@@ -35,7 +35,6 @@ public class PlayScreenController
         ObserverPlayer observer = ObserverPlayer.getObserver();
         observer.subscribe(Scenes.SETTING_SCREEN, this::setPlayer);
         foreground.setOnMousePressed(this::handleMousePress);
-
         /*
         foreground.setOnMouseDragged(e ->
         {
@@ -84,18 +83,10 @@ public class PlayScreenController
 
     public void handleValidMove(MouseEvent e)
     {
-        Square square = getSelectedSquare(e.getX(), e.getY());
-        if (square.getPiece() != null && gameBoard.canCapture(selectedSquare, square))
-        {
-            gameBoard.capture(selectedSquare, square);
-            System.out.println("Success");
-        }
-
-        clearSelectedSquare();
         gameBoard.move(selectedSquare, getSelectedSquare(e.getX(), e.getY()));
+        clearSelectedSquare();
         clearLegalMoves(selectedPiece.getLegalMoves());
         drawBoard();
-        selectedPiece.computeLegalMoves(gameBoard);
         selectedPiece = null;
         selectedSquare = null;
         changeTurn();
@@ -116,6 +107,7 @@ public class PlayScreenController
             System.out.println(selectedPiece);
             selectedPiece.computeLegalMoves(gameBoard);
             drawMoves(selectedPiece.getLegalMoves());
+            System.out.println(gameBoard.isKingInCheck(player.getColor()));
         }
     }
 
@@ -222,7 +214,6 @@ public class PlayScreenController
             setPlayerLabels();
             gameBoard = new GameBoard(background.getWidth(), this.player.isWhite());
             drawBoard();
-            ComputeAllLegalMoves();
         }
     }
 
