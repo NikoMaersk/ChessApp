@@ -7,5 +7,6 @@ module com.example.chessmobile {
     exports com.example.chessmobile;
     exports controller;
     exports model;
+    exports model.chesspieces;
     opens controller to javafx.fxml;
 }

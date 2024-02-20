@@ -415,11 +415,21 @@ public class GameBoard
     }
 
     public boolean isBlackKingCheck() {
-        return ((King)blackKingSquare.getPiece()).getInCheck();
+        Piece king = blackKingSquare.getPiece();
+        if (king instanceof King) {
+            return ((King)king).getInCheck();
+        } else {
+            return false;
+        }
     }
 
-    public boolean iswHITEKingCheck() {
-        return ((King)whiteKingSquare.getPiece()).getInCheck();
+    public boolean isWhiteKingCheck() {
+        Piece king = whiteKingSquare.getPiece();
+        if (king instanceof King) {
+            return ((King)king).getInCheck();
+        } else {
+            return false;
+        }
     }
 
     public void setCheckingPieceSquare(Square checkingPieceSquare)
