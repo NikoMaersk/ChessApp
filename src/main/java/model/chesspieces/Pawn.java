@@ -69,19 +69,28 @@ public class Pawn extends Piece
         }
 
 
-        if (canCapture(gameBoard, x - 1, targetY))
+        if (canCapture(gameBoard, square, x - 1, targetY))
             super.legalMoves.add(new Move(x - 1, targetY, true));
-        if (canCapture(gameBoard, x + 1, targetY))
+        if (canCapture(gameBoard, square, x + 1, targetY))
             super.legalMoves.add(new Move(x + 1, targetY, true));
     }
 
-    private boolean canCapture(GameBoard gameBoard, int x, int y)
+    private boolean canCapture(GameBoard gameBoard, Square square, int x, int y)
     {
         if (!gameBoard.isValidCoordinate(x, y))
             return false;
 
-        Piece targetPiece = gameBoard.getSquaresAs2D()[x][y].getPiece();
-        return targetPiece != null && targetPiece.getColor() != this.getColor();
+        Piece targetPiece = gameBoard.getPieceAt(x, y);
+        if (targetPiece != null && targetPiece.getColor() != this.getColor())
+        {
+            if (targetPiece instanceof King) {
+                ((King) targetPiece).setInCheck(true);
+                gameBoard.setCheckingPieceSquare(square);
+            }
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean isFirstMove()

@@ -57,6 +57,11 @@ public abstract class Piece
                     if (targetedPiece.getColor() != this.color)
                     {
                         moveList.add(new Move(targetX, targetY, true));
+                        if (targetedPiece instanceof King)
+                        {
+                            ((King) targetedPiece).setInCheck(true);
+                            gameBoard.setCheckingPieceSquare(square);
+                        }
                     }
                 }
             }
@@ -114,6 +119,11 @@ public abstract class Piece
                         if (targetedPiece.getColor() != this.color)
                         {
                             moveList.add(new Move(targetX, targetY, true));
+                            if (targetedPiece instanceof King)
+                            {
+                                ((King)targetedPiece).setInCheck(true);
+                                gameBoard.setCheckingPieceSquare(square);
+                            }
                         }
                         break;
                     }

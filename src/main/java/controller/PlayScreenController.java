@@ -58,17 +58,18 @@ public class PlayScreenController
             return;
         }
         */
+        Square tempSquare = getSelectedSquare(e.getX(), e.getY());
 
         if (selectedSquare != null
                 && selectedPiece != null
-                && gameBoard.canMoveTo(selectedSquare, getSelectedSquare(e.getX(), e.getY()))
+                && gameBoard.canMoveTo(selectedSquare, tempSquare)
                 && selectedPiece.getColor() == player.getColor())
         {
-            handleValidMove(e);
+            handleValidMove(e, tempSquare);
         }
         else if (selectedSquare != null
                 && selectedPiece != null
-                && selectedPiece == getSelectedSquare(e.getX(), e.getY()).getPiece())
+                && selectedPiece == tempSquare.getPiece())
         {
             clearLegalMoves(selectedPiece.getLegalMoves());
             selectedPiece = null;
@@ -76,14 +77,14 @@ public class PlayScreenController
         }
         else
         {
-            handleInvalidMove(e);
+            handleInvalidMove(e, tempSquare);
             System.out.println("Invalid move");
         }
     }
 
-    public void handleValidMove(MouseEvent e)
+    public void handleValidMove(MouseEvent e, Square tempSquare)
     {
-        gameBoard.move(selectedSquare, getSelectedSquare(e.getX(), e.getY()));
+        gameBoard.move(selectedSquare, tempSquare);
         clearSelectedSquare();
         clearLegalMoves(selectedPiece.getLegalMoves());
         drawBoard();
@@ -92,14 +93,14 @@ public class PlayScreenController
         changeTurn();
     }
 
-    public void handleInvalidMove(MouseEvent e)
+    public void handleInvalidMove(MouseEvent e, Square tempSquare)
     {
         if (selectedPiece != null)
         {
             clearLegalMoves(selectedPiece.getLegalMoves());
         }
 
-        selectedSquare = getSelectedSquare(e.getX(), e.getY());
+        selectedSquare = tempSquare;
         selectedPiece = selectedSquare.getPiece();
 
         if (selectedPiece != null && selectedPiece.getColor() == player.getColor())
@@ -107,7 +108,7 @@ public class PlayScreenController
             System.out.println(selectedPiece);
             selectedPiece.computeLegalMoves(gameBoard);
             drawMoves(selectedPiece.getLegalMoves());
-            System.out.println(gameBoard.isKingInCheck(player.getColor()));
+            System.out.println(gameBoard.isBlackKingCheck());
         }
     }
 
@@ -120,14 +121,6 @@ public class PlayScreenController
             if (square.getPiece() != null)
             {
                 drawPiece(square);
-            }
-        }
-    }
-
-    private void ComputeAllLegalMoves() {
-        for (Square square : gameBoard.getSquares()) {
-            if (square.getPiece() != null) {
-                square.getPiece().computeLegalMoves(gameBoard);
             }
         }
     }

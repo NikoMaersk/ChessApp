@@ -24,6 +24,7 @@ public class GameBoard
 
     private Square whiteKingSquare;
     private Square blackKingSquare;
+    private Square checkingPieceSquare;
 
     /**
      * Creates a new GameBoard
@@ -164,7 +165,7 @@ public class GameBoard
     }
 
 
-    public void capture(Square origin, Square target)
+    private void capture(Square origin, Square target)
     {
         if (target.getPiece() != null)
         {
@@ -182,7 +183,7 @@ public class GameBoard
     }
 
 
-    public boolean canCapture(Square origin, Square target)
+    private boolean canCapture(Square origin, Square target)
     {
         Piece attacker = origin.getPiece();
         Piece targetPiece = target.getPiece();
@@ -204,19 +205,21 @@ public class GameBoard
     }
 
 
-    public boolean isCheckmate(ChessColorEnum currentPlayer)
+    public boolean isCheckmate(ChessColorEnum player)
     {
-        return isKingInCheck(currentPlayer) && noLegalMoves();
+        return isKingInCheck(player) && noLegalMoves(player);
     }
 
-    public boolean isKingInCheck(ChessColorEnum currentPlayer) {
+    public boolean isKingInCheck(ChessColorEnum player) {
         for (Square square : getSquaresWithPieces()) {
-            Piece piece = square.getPiece();
-            if (currentPlayer == piece.getColor())
+            ChessColorEnum pieceColor = square.getPiece().getColor();
+            if (player == pieceColor)
             {
-                Square kingSquare = currentPlayer != whiteKingSquare.getPiece().getColor() ? whiteKingSquare : blackKingSquare;
+                Square kingSquare = player != whiteKingSquare.getPiece().getColor() ? whiteKingSquare : blackKingSquare;
                 if (canCapture(square, kingSquare))
                 {
+                    checkingPieceSquare = square;
+                    ((King)kingSquare.getPiece()).setInCheck(true);
                     return true;
                 }
             }
@@ -225,7 +228,37 @@ public class GameBoard
         return false;
     }
 
-    private boolean noLegalMoves() {
+    public boolean noLegalMoves(ChessColorEnum player) {
+
+        for (Square square : getSquaresWithPieces()) {
+            Piece piece = square.getPiece();
+
+            if (piece.getColor() == player) {
+                List<Move> moves = piece.getLegalMoves();
+
+                if (!moves.isEmpty()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isBlockingMove(Square attackSquare, Square blockSquare, Square targetSquare) {
+
+        Piece attacker = attackSquare.getPiece();
+        Piece blocker = blockSquare.getPiece();
+        Piece target = targetSquare.getPiece();
+
+        for (Move attMove : attacker.getLegalMoves()) {
+
+
+            for (Move blockMove : blocker.getLegalMoves()) {
+
+            }
+        }
+
         return false;
     }
 
@@ -239,6 +272,15 @@ public class GameBoard
     public boolean isValidCoordinate(int x, int y)
     {
         return x >= 0 && x < squares.length && y >= 0 && y < squares[x].length;
+    }
+
+
+    public void computeAllLegalMoves() {
+        for (Square square : getSquaresWithPieces()) {
+            Piece piece = square.getPiece();
+
+            piece.computeLegalMoves(this);
+        }
     }
 
 
@@ -260,15 +302,24 @@ public class GameBoard
         }
     }
 
+    public Square getSquareAt(int x, int y)
+    {
+        if (isValidCoordinate(x, y))
+            return squares[x][y];
+        else
+            return null;
+    }
+
     public List<Square> getSquaresWithPieces()
     {
         List<Square> result = new ArrayList<>();
 
-        for (Square square : getSquares())
-        {
-            if (square.getPiece() != null)
-            {
-                result.add(square);
+        for (Square[] rows : squares) {
+            for (Square square : rows) {
+                if (square.getPiece() != null)
+                {
+                    result.add(square);
+                }
             }
         }
 
@@ -361,5 +412,23 @@ public class GameBoard
     public boolean isWhite()
     {
         return IS_WHITE;
+    }
+
+    public boolean isBlackKingCheck() {
+        return ((King)blackKingSquare.getPiece()).getInCheck();
+    }
+
+    public boolean iswHITEKingCheck() {
+        return ((King)whiteKingSquare.getPiece()).getInCheck();
+    }
+
+    public void setCheckingPieceSquare(Square checkingPieceSquare)
+    {
+        this.checkingPieceSquare = checkingPieceSquare;
+    }
+
+    public Square getCheckingPieceSquare()
+    {
+        return checkingPieceSquare;
     }
 }

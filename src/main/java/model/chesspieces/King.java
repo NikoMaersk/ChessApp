@@ -8,6 +8,8 @@ import java.util.List;
 
 public class King extends Piece
 {
+    private boolean isInCheck = false;
+
     public King(boolean isWhite)
     {
         super(isWhite ? new File("src/main/resources/images/wk.png").getAbsolutePath() : new File("src/main/resources/images/bk.png").getAbsolutePath(), "king", 100, isWhite);
@@ -30,5 +32,15 @@ public class King extends Piece
         };
 
         super.fillWithPossibleMoves(possibleMoves, super.legalMoves, gameBoard);
+    }
+
+    public boolean getInCheck()
+    {
+        return isInCheck;
+    }
+
+    public void setInCheck(boolean inCheck)
+    {
+        isInCheck = inCheck;
     }
 }
