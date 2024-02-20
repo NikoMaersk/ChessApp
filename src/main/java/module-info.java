@@ -6,5 +6,6 @@ module com.example.chessmobile {
     opens com.example.chessmobile to javafx.fxml;
     exports com.example.chessmobile;
     exports controller;
+    exports model;
     opens controller to javafx.fxml;
 }

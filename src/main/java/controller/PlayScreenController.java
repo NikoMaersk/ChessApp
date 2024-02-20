@@ -65,7 +65,7 @@ public class PlayScreenController
                 && gameBoard.canMoveTo(selectedSquare, tempSquare)
                 && selectedPiece.getColor() == player.getColor())
         {
-            handleValidMove(e, tempSquare);
+            handleValidMove(tempSquare);
         }
         else if (selectedSquare != null
                 && selectedPiece != null
@@ -77,12 +77,12 @@ public class PlayScreenController
         }
         else
         {
-            handleInvalidMove(e, tempSquare);
+            handleInvalidMove(tempSquare);
             System.out.println("Invalid move");
         }
     }
 
-    public void handleValidMove(MouseEvent e, Square tempSquare)
+    public void handleValidMove(Square tempSquare)
     {
         gameBoard.move(selectedSquare, tempSquare);
         clearSelectedSquare();
@@ -93,7 +93,7 @@ public class PlayScreenController
         changeTurn();
     }
 
-    public void handleInvalidMove(MouseEvent e, Square tempSquare)
+    public void handleInvalidMove(Square tempSquare)
     {
         if (selectedPiece != null)
         {
